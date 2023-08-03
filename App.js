@@ -2,12 +2,11 @@ import { StatusBar } from 'expo-status-bar';
 import { 
   StyleSheet, 
   Text, 
-  View, 
-  Button, 
-  ScrollView, 
+  View,  
   Image, 
   FlatList, 
-  TouchableOpacity} from 'react-native';
+  TouchableOpacity,
+  Modal} from 'react-native';
 import Product from './Component/Product/product'
 //useState
 import React, { useState } from 'react'; 
@@ -67,6 +66,8 @@ export default function App() {
 
     const [isDisplayed,setIsDisplayed]=useState(false);
 
+    const  [modal,setModal]=useState(true);
+
     // let menu = products.map(product=>(
     //   <View key={Math.random()}>
     //     <Text style={styles.card}>{product.name}</Text>
@@ -76,6 +77,42 @@ export default function App() {
   return (
 
       <View style={styles.container}>
+        <Modal transparent={true} visible={modal} animationType="slide">
+          <View
+            style={{
+            flex:1,
+            alignItems:'center',
+            justifyContent:'center',
+            backgroundColor:'rgba(0,0,0,.5)'
+            }}>
+              <View style={{
+              backgroundColor:'white',
+              padding:17,
+              elevation:40,
+              shadowColor:'#006341',
+              shadowOpacity:.4,
+              shadowRadius:5,
+              shadowOffset:{width:0,height:0}
+              }}>
+                <TouchableOpacity onPress={()=>setModal(false)}>
+                  <Text style={{
+                      textAlignVertical:"center",
+                      textAlign:"center",
+                      borderStyle:"solid",
+                      borderWidth:2,
+                      borderRadius:30,
+                      borderColor:'#006341',
+                      fontSize:15,
+                      width:30,
+                      height:30,
+                      color:'#006341',
+                      marginBottom:8}}>X</Text>
+                </TouchableOpacity>
+                <Text>Ceci est ma première modale</Text>
+            </View>
+          </View>
+        </Modal>
+
         <Image source={require('./assets/starbucklogo.png')} style={styles.logo}/>
         <Text style={styles.title}>STARBUCKS</Text>
         <StatusBar style="auto" />
